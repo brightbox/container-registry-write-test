@@ -23,5 +23,5 @@ jobs:
         run: docker pull ruby:2.7
       - name: push image to brightbox
         run: |
-          docker tag ruby:2.7 cr.brightbox.com/acc-h3nbk/pushtest:${{ steps.tagName.outputs.tag }}
-          docker push cr.brightbox.com/acc-h3nbk/pushtest:${{ steps.tagName.outputs.tag }}
+          docker tag ruby:2.7 cr.brightbox.com/acc-h3nbk/githubtest:${{ steps.tagName.outputs.tag }}
+          docker push cr.brightbox.com/acc-h3nbk/githubtest:${{ steps.tagName.outputs.tag }}
