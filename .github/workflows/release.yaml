@@ -20,8 +20,8 @@ jobs:
           username: cli-wcv2z
           password: b2y7sv1xi4cqpxk
       - name: pull an image
-        run: docker pull ubuntu:latest
+        run: docker pull kasmweb/deskto:1.8.1-beta
       - name: push image to brightbox
         run: |
-          docker tag ubuntu:latest cr.brightbox.com/acc-h3nbk/githubtest:${{ steps.tagName.outputs.tag }}
+          docker tag kasmweb/deskto:1.8.1-beta cr.brightbox.com/acc-h3nbk/githubtest:${{ steps.tagName.outputs.tag }}
           docker push cr.brightbox.com/acc-h3nbk/githubtest:${{ steps.tagName.outputs.tag }}
