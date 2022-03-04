@@ -20,7 +20,7 @@ jobs:
           username: cli-wcv2z
           password: b2y7sv1xi4cqpxk
       - name: pull an image
-        run: docker pull ruby:2.8
+        run: docker pull ruby:2.7
       - name: push image to brightbox
         run: |
           docker tag ruby2.8 cr.brightbox.com/acc-h3nbk/pushtest:${{ steps.tagName.outputs.tag }}
