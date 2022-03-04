@@ -13,6 +13,11 @@ jobs:
       - uses: olegtarasov/get-tag@v2.1
         id: tagName
       - uses: actions/checkout@v2
+      - name: traceroute
+        run: |
+          apt-get update -qq
+          apt-get install -qqy mtr-tiny
+          mtr -wnr cr.brightbox.com
       - name: Login to Container Registry
         uses: docker/login-action@v1
         with:
