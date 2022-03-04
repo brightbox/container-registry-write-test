@@ -1,0 +1,27 @@
+name: 'Docker build and release'
+on:
+  push:
+    tags:
+      - '*'
+
+# cr.brightbox.com/acc-h3nbk/pushtest
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: olegtarasov/get-tag@v2.1
+        id: tagName
+      - uses: actions/checkout@v2
+      - name: Login to Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: cr.brightbox.com
+          username: cli-wcv2z
+          password: b2y7sv1xi4cqpxk
+      - name: pull an image
+        run: docker pull ruby:2.8
+      - name: push image to brightbox
+        run: |
+          docker tag ruby2.8 cr.brightbox.com/acc-h3nbk/pushtest:${{ steps.tagName.outputs.tag }}
+          docker push cr.brightbox.com/acc-h3nbk/pushtest:${{ steps.tagName.outputs.tag }}
