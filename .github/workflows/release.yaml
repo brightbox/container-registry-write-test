@@ -25,6 +25,10 @@ jobs:
           registry: cr.brightbox.com
           username: cli-wcv2z
           password: b2y7sv1xi4cqpxk
+      - name: Manual docker build
+        run: |
+          docker build -t cr.brightbox.com/acc-h3nbk/githubtest:${{ steps.tagName.outputs.tag }} .
+          docker push cr.brightbox.com/acc-h3nbk/githubtest:${{ steps.tagName.outputs.tag }}
       - name: Docker build
         uses: docker/build-push-action@v2
         with:
