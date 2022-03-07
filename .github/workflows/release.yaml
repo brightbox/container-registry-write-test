@@ -14,6 +14,11 @@ jobs:
         with:
           buildkitd-flags: --debug
           driver: docker
+      - name: inspect
+        run: |
+          docker buildx ls
+          docker buildx inspect
+
       - name: Login to Container Registry
         uses: docker/login-action@v1
         with:
