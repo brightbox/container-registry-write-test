@@ -13,6 +13,7 @@ jobs:
       - uses: docker/setup-buildx-action@v1
         with:
           buildkitd-flags: --debug
+          driver-opts: image=moby/buildkit:master
       - name: inspect
         run: |
           docker buildx ls
