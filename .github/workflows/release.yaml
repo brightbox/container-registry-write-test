@@ -24,6 +24,7 @@ jobs:
           file: ./Dockerfile
           tags: |
             cr.brightbox.com/acc-h3nbk/githubtest:${{ steps.tagName.outputs.tag }}
+          load: true
           push: false
       - name: push
         run: docker push cr.brightbox.com/acc-h3nbk/githubtest:${{ steps.tagName.outputs.tag }}
