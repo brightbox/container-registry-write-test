@@ -14,22 +14,17 @@ jobs:
         with:
           buildkitd-flags: --debug
           driver-opts: image=moby/buildkit:v0.10.0
+      - name: Login to Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: quay.io
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_SECRET }}
       - name: build
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ./Dockerfile
           tags: |
-            cr.brightbox.com/acc-h3nbk/githubtest:${{ steps.tagName.outputs.tag }}
-          push: false
-          load: true
-      - name: export image to containerd
-        run:
-          docker save cr.brightbox.com/acc-h3nbk/githubtest:${{ steps.tagName.outputs.tag }} > /tmp/image.tar
-      - name: push from containerd inside container
-        run:
-          docker run -v /tmp:/tmp -i cr.brightbox.com/acc-h3nbk/githubtest:${{ steps.tagName.outputs.tag }} <<EOF
-          containerd &
-          sleep 2 &&
-          sudo ctr images import /tmp/image.tar &&
-          sudo ctr images push -u ${{ secrets.CR_USERNAME }}:${{ secrets.CR_SECRET }} cr.brightbox.com/acc-h3nbk/githubtest:${{ steps.tagName.outputs.tag }}
+            quay.io/johnleach/githubtest:${{ steps.tagName.outputs.tag }}
+          push: true
