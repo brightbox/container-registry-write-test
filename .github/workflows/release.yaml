@@ -40,4 +40,4 @@ jobs:
           docker save cr.brightbox.com/acc-h3nbk/githubtest:${{ steps.tagName.outputs.tag }} | sudo ctr images import -
       - name: push from containerd
         run:
-          sudo ctr images push -u ${{ secrets.CR_USERNAME }}:${{ secrets.CR_SECRET }} cr.brightbox.com/acc-h3nbk/githubtest:${{ steps.tagName.outputs.tag }}
+          sudo ctr images push -u ${{ secrets.CR_USERNAME }}:${{ secrets.CR_SECRET }} --max-concurrent-uploaded-layers 10 cr.brightbox.com/acc-h3nbk/githubtest:${{ steps.tagName.outputs.tag }}
