@@ -20,6 +20,10 @@ jobs:
           registry: cr.brightbox.com
           username: ${{ secrets.CR_USERNAME }}
           password: ${{ secrets.CR_SECRET }}
+      - name: inspect tcp_tw_reuse
+        run: |
+          cat /proc/sys/net/ipv4/tcp_tw_reuse
+          echo 0 | sudo tee /proc/sys/net/ipv4/tcp_tw_reuse
       - name: build and push
         uses: docker/build-push-action@v2
         with:
